@@ -3,6 +3,7 @@ package com.domi.service.impl;
 import com.domi.mapper.TbItemDescMapper;
 import com.domi.mapper.TbItemMapper;
 import com.domi.mapper.TbItemParamItemMapper;
+import com.domi.mapper.TbItemParamMapper;
 import com.domi.pojo.*;
 import com.domi.service.ItemService;
 import com.domi.utils.IDUtils;
@@ -27,6 +28,8 @@ public class ItemServiceImpl implements ItemService {
     private TbItemDescMapper itemDescMapper;
     @Autowired
     private TbItemParamItemMapper itemParamItemMapper;
+    @Autowired
+    private TbItemParamMapper itemParamMapper;
     /**
      * 根据商品id查询
      */
