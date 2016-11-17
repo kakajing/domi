@@ -1,15 +1,17 @@
 package com.domi.service.impl;
 
+import com.domi.mapper.TbItemDescMapper;
 import com.domi.mapper.TbItemMapper;
-import com.domi.pojo.EasyUIDataGridResult;
-import com.domi.pojo.TbItem;
-import com.domi.pojo.TbItemExample;
+import com.domi.mapper.TbItemParamItemMapper;
+import com.domi.pojo.*;
 import com.domi.service.ItemService;
+import com.domi.utils.IDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +23,13 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemMapper itemMapper;
-
+    @Autowired
+    private TbItemDescMapper itemDescMapper;
+    @Autowired
+    private TbItemParamItemMapper itemParamItemMapper;
+    /**
+     * 根据商品id查询
+     */
     @Override
     public TbItem getItemById(Long itemId) {
 
@@ -56,5 +64,67 @@ public class ItemServiceImpl implements ItemService {
         PageInfo<TbItem> pageInfo = new PageInfo<>(list);
         result.setTotal(pageInfo.getTotal());
         return result;
+    }
+
+    @Override
+    public DomiResult createItem(TbItem item, String desc, String itemParam) {
+
+        //生成商品id
+        long itemId = IDUtils.genItemId();
+        //补全TbItem属性
+        item.setId(itemId);
+        // '商品状态，1-正常，2-下架，3-删除'
+        item.setStatus((byte) 1);
+        // 创建时间和更新时间
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
+        //插入商品表
+        itemMapper.insert(item);
+
+        //商品描述
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        //插入商品描述数据
+        itemDescMapper.insert(itemDesc);
+
+        ////添加商品规格参数处理
+        TbItemParamItem itemParamItem = new TbItemParamItem();
+        itemParamItem.setItemId(itemId);
+        itemParamItem.setParamData(itemParam);
+        itemParamItem.setCreated(new Date());
+        itemParamItem.setUpdated(new Date());
+        //插入商品规格参数数据
+        itemParamItemMapper.insert(itemParamItem);
+
+        return DomiResult.ok();
+    }
+
+    /**
+     * 添加商品描述
+     */
+    public DomiResult insertItemDesc(Long itemId, String desc){
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+
+        return DomiResult.ok();
+    }
+
+    /**
+     * 添加规格参数
+     */
+    public DomiResult insertItemParamItem(Long itemId, String itemParam){
+        TbItemParamItem itemParamItem = new TbItemParamItem();
+        itemParamItem.setItemId(itemId);
+        itemParamItem.setParamData(itemParam);
+        itemParamItem.setCreated(new Date());
+        itemParamItem.setUpdated(new Date());
+
+        return DomiResult.ok();
     }
 }

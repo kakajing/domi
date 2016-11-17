@@ -1,5 +1,6 @@
 package com.domi.service;
 
+import com.domi.pojo.DomiResult;
 import com.domi.pojo.EasyUIDataGridResult;
 import com.domi.pojo.TbItem;
 
@@ -11,4 +12,5 @@ public interface ItemService {
 
     TbItem getItemById(Long itemId);
     EasyUIDataGridResult getItemList(int page, int rows);
+    DomiResult createItem(TbItem item, String desc, String itemParam);
 }
