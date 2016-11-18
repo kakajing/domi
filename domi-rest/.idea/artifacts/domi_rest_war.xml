@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="domi-rest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="domi-rest.war">
+      <element id="artifact" artifact-name="domi-rest:war exploded" />
+    </root>
+  </artifact>
+</component>
