@@ -26,12 +26,16 @@ public class ContentServiceImpl implements ContentService {
     @Value("${REST_CONTENT_AD1_CID}")
     private String REST_CONTENT_AD1_CID;
 
+
     /**
      * 获得大广告位的内容
      * @return
      */
     @Override
     public String getAd1List() {
+
+
+
         //调用服务获得数据
         String json = HttpClientUtil.doGet(REST_BASE_URL + REST_CONTENT_URL + REST_CONTENT_AD1_CID);
         //把json转换成java对象

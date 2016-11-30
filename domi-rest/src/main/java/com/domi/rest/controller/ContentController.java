@@ -2,7 +2,7 @@ package com.domi.rest.controller;
 
 import com.domi.pojo.DomiResult;
 import com.domi.pojo.TbContent;
-import com.domi.rest.service.ContenService;
+import com.domi.rest.service.ContentService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * 发布内容查询服务
  * Author 卡卡
  * Created by jing on 2016/11/29.
  */
@@ -21,14 +20,32 @@ import java.util.List;
 public class ContentController {
 
     @Autowired
-    private ContenService contenService;
+    private ContentService contentService;
 
+    /**
+     * 发布内容查询服务
+     */
     @RequestMapping("/content/{cid}")
     @ResponseBody
-    public DomiResult getContentLIst(@PathVariable Long cid){
+    public DomiResult getContentList(@PathVariable Long cid) {
         try {
-            List<TbContent> list = contenService.getContentList(cid);
+            List<TbContent> list = contentService.getContentList(cid);
             return DomiResult.ok(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return DomiResult.build(500, ExceptionUtils.getStackTrace(e));
+        }
+    }
+
+    /**
+     * 缓存同步
+     */
+    @RequestMapping("/syn/content/{cid}")
+    @ResponseBody
+    public DomiResult synContent(@PathVariable Long cid){
+        try {
+            DomiResult result = contentService.synContent(cid);
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             return DomiResult.build(500, ExceptionUtils.getStackTrace(e));

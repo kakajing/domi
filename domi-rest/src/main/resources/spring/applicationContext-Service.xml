@@ -13,11 +13,11 @@
     <context:component-scan base-package="com.domi.rest.service"/>
 
     <!-- 配置redis客户端单机版 -->
-    <!--<bean id="jedisPool" class="redis.clients.jedis.JedisPool">-->
-        <!--<constructor-arg name="host" value="192.168.154.128"/>-->
-        <!--<constructor-arg name="port" value="6379"/>-->
-    <!--</bean>-->
-    <!--<bean id="jedisClientSingle" class="com.taotao.rest.component.impl.JedisClientSingle"/>-->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="host" value="192.168.154.128"/>
+        <constructor-arg name="port" value="6379"/>
+    </bean>
+    <bean id="jedisClientSingle" class="com.domi.rest.component.impl.JedisClientSingle"/>
 
     <!-- 配置redis客户端集群版 -->
     <!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">-->
@@ -55,6 +55,6 @@
             <!--</set>-->
         <!--</constructor-arg>-->
     <!--</bean>-->
-    <!--<bean id="jedisClientCluster" class="com.taotao.rest.component.impl.JedisClientCluster"/>-->
+    <!--<bean id="jedisClientCluster" class="com.domi.rest.component.impl.JedisClientCluster"/>-->
 
 </beans>
