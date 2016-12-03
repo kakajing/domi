@@ -18,6 +18,10 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    /**
+     * 索引库导入数据
+     * @return
+     */
     @RequestMapping("/importall")
     @ResponseBody
     public DomiResult importaAll(){

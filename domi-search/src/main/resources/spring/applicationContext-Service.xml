@@ -11,7 +11,7 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
     <!--扫描包加载Service实现类-->
-    <context:component-scan base-package="com.domi.search.service"/>
+    <context:component-scan base-package="com.domi.search.service,com.domi.search.dao"/>
     <!--单机版solr客户端-->
     <bean id="server" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
         <constructor-arg name="baseURL" value="http://192.168.154.130:8080/solr"/>
