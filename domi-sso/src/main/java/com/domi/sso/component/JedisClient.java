@@ -14,4 +14,5 @@ public interface JedisClient {
     Long expire(String key, int second);
     Long ttl(String key);
     Long hdel(String key, String item);
+    Long del(String key);
 }
