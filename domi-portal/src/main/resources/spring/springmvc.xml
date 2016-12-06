@@ -9,11 +9,21 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:resource/*.properties"/>
+
     <context:component-scan base-package="com.domi.portal.controller"/>
+
     <mvc:annotation-driven/>
     <bean  id="resourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp"/>
     </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/item/**"/>
+            <bean class="com.domi.portal.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

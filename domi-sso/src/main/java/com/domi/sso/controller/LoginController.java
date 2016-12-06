@@ -68,7 +68,7 @@ public class LoginController {
      * @param callback
      * @return
      */
-    @RequestMapping("/user/loginout/{token}")
+    @RequestMapping("/user/logout/{token}")
     @ResponseBody
     public Object loginoutByToken(@PathVariable String token, String callback){
         try {
