@@ -51,5 +51,10 @@
         <!--伪静态-->
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>domi-portal</servlet-name>
+        <!--伪静态-->
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
 
 </web-app>

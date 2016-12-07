@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         TbUser user = userService.getUserByToken(request, response);
         // 5、如果用户session已经过期，跳转到登录页面
         if (user == null){
-            response.sendRedirect(SSO_LOGIN_URL + "?redirectURL=" + request.getRequestURI());
+            response.sendRedirect(SSO_LOGIN_URL + "?redirectURL=" + request.getRequestURL());
             return false;
         }
         // 6、如果没有过期，放行
